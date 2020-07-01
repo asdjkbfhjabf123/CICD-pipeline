@@ -16,15 +16,15 @@ node{
     }
     
     stage ('Build Docker Image') {
-     sh 'docker build -t yashasvinerali/my-app:1 .'
+     sh 'docker build -t kaveri/my-app:1 .'
    }
    
    stage('Push Docker image'){
    withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
-   sh "docker login -u yashasvinerali -p ${docker_password}"
+   sh "docker login -u kaveri -p ${docker_password}"
 }
   
-   sh 'docker push yashasvinerali/my-app:1'
+   sh 'docker push kaveri/my-app:1'
    
    
    
