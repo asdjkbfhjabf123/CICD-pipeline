@@ -27,3 +27,4 @@ node{
   
    sh 'docker push kavi31/my-app:1'
 }
+}
