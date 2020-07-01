@@ -21,7 +21,7 @@ node{
    }
    
    stage('Push Docker image'){
-   withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
+   withCredentials([string(credentialsId: ' ', variable: 'docker_password')]) {
    sh "docker login -u kavi31 -p ${docker_password}"
 }
   
