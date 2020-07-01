@@ -8,12 +8,20 @@ node{
        sh "${mvnHome}/bin/mvn package"
    } 
    
-    stage('SonarQube Analysis') {
-        def mvnHome =  tool name: 'M2_HOME', type: 'maven'
-        withSonarQubeEnv('sonarrunner') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
+   stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'sonarrunner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
     }
+}
+
     
     stage ('Build Docker Image') {
      sh 'docker build -t kaveri/my-app:1 .'
